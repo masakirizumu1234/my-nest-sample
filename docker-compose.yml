@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  jss-ccweb:
+    container_name: jss-ccweb-frontend
+    image: node:20.10.0
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/root/jss-ccweb
+      - /root/jss-ccweb/frontend/node_modules
+    working_dir: /root/jss-ccweb/frontend
+    command: bash -c 'yarn install && yarn dev && yarn start'
+    ports:
+      - '3001:3000'
+  jss-ccweb-api:
+    container_name: jss-ccweb-backend
+    image: node:20.10.0
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/root/jss-ccweb
+      - /root/jss-ccweb/backend/node_modules
+    working_dir: /root/jss-ccweb/backend
+    command: bash -c 'yarn install && yarn start'
+    ports:
+      - '3000:3000'
